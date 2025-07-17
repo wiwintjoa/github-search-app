@@ -30,7 +30,7 @@ export async function fetchFollowers(username: string): Promise<User[]> {
   return getCachedOrFetch(key, async () => {
     try {
       const res = await api.get(`/search/users?q=${encodeURIComponent(username)}&per_page=5`);
-      return res.data;
+      return res.data.items;
     } catch (err: any) {
       console.error('Error fetching followers:', err.message);
       throw new Error('Unable to fetch followers. Please check the username.');

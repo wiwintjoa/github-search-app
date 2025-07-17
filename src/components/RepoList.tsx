@@ -1,6 +1,6 @@
-// src/components/RepoList.tsx
-import React from 'react';
-import type { Repo } from '../types/github';
+import React from "react";
+import type { Repo } from "../types/github";
+import { LiaStarSolid } from "react-icons/lia";
 
 interface RepoListProps {
   repos: Repo[];
@@ -14,12 +14,21 @@ const RepoList: React.FC<RepoListProps> = ({ repos }) => {
   return (
     <ul className="space-y-4 mt-2">
       {repos.map((repo) => (
-        <li key={repo.id} className="border rounded p-4 hover:shadow transition-shadow">
-          <h3 className="text-lg font-bold text-purple-700">{repo.name}</h3>
-          <p className="text-gray-600">{repo.description || 'No description provided.'}</p>
-          <div className="text-sm text-gray-500 mt-2">
-            ⭐ Stars: {repo.stargazers_count} | 🛠 Language: {repo.language || 'N/A'}
-          </div>
+        <li
+          key={repo.id}
+          className="border rounded p-4 hover:shadow transition-shadow"
+        >
+        <div className="flex justify-between items-center mb-2">
+            <h3 className="text-lg font-bold text-purple-700">{repo.name}</h3>
+            <div className="flex items-center space-x-1 text-gray-600">
+                {repo.stargazers_count} <LiaStarSolid color="gold" size={24} />
+            </div>
+        </div>
+          
+          <p className="text-gray-600">
+            {repo.description || "No description provided."}
+          </p>
+         
           <a
             href={repo.html_url}
             target="_blank"
